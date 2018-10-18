@@ -45,8 +45,9 @@ var IonicDeeplink = {
 
       for(var targetPath in paths) {
         pathData = paths[targetPath];
+        var path = targetPath.slice(0, targetPath.indexOf('?'));
 
-        matchedParams = self.routeMatch(targetPath, realPath);
+        matchedParams = self.routeMatch(path, realPath);
 
         if(matchedParams !== false) {
           finalArgs = extend({}, matchedParams, args);
@@ -191,14 +192,14 @@ var IonicDeeplink = {
       return data.host;
     }
 
-    var hostOrScheme = data.host || data.scheme + '://';
+    var hostOrScheme = "/" + data.host || data.scheme + '://';
     var restOfUrl = data.url.slice(data.url.indexOf(hostOrScheme) + hostOrScheme.length);
 
     if(restOfUrl.indexOf('?') > -1) {
       restOfUrl = restOfUrl.slice(0, restOfUrl.indexOf('?'));
     }
 
-    if(restOfUrl.indexOf('#') > -1) {
+    if(restOfUrl.indexOf('#'.sc) > -1) {
       restOfUrl = restOfUrl.slice(0);
     }
 
